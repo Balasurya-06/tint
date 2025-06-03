@@ -10,301 +10,738 @@ const Home = () => {
       <Navbar />
       <style>
         {`
+          :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1a1a1a;
+            --bg-element: #222222;
+            --text-primary: #f5f5f6;
+            --text-secondary: #a0a0a0;
+            --text-muted: #888888;
+            --border-color: #333333;
+            --brand-color: #ff3f6c;
+            --brand-light: #ff527b;
+            --success-color: #03a685;
+            --warning-color: #ff905a;
+          }
+
           .home-page {
-            background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
-            color: #f3f4f6;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Assistant', 'Segoe UI', sans-serif;
             position: relative;
             overflow-x: hidden;
           }
-          .cart-top-btn {
+          
+          /* Hero Banner Section */
+          .hero-banner {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            margin-bottom: 40px;
+            overflow: hidden;
+          }
+          .hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+          }
+          .hero-banner .overlay {
             position: absolute;
-            top: 32px;
-            right: 40px;
-            z-index: 10;
-            background: linear-gradient(90deg, #6366f1 60%, #818cf8 100%);
-            color: #fff;
-            padding: 10px 28px;
-            border-radius: 9999px;
-            font-size: 1.07rem;
-            font-weight: 500;
+            bottom: 40px;
+            left: 40px;
+            max-width: 500px;
+          }
+          .hero-banner h1 {
+            font-size: 40px;
+            color: #ffffff;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+            margin-bottom: 16px;
+            font-weight: 700;
+          }
+          .hero-banner p {
+            font-size: 20px;
+            color: #ffffff;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            margin-bottom: 24px;
+          }
+          .shop-now-btn {
+            background: var(--brand-color);
+            color: white;
+            padding: 12px 40px;
+            font-size: 16px;
+            font-weight: 600;
             border: none;
-            box-shadow: 0 2px 12px #6366f13a;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
-            outline: none;
-            letter-spacing: 0.5px;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            transition: background 0.3s;
           }
-          .cart-top-btn:hover {
-            background: linear-gradient(90deg, #818cf8 60%, #6366f1 100%);
-            box-shadow: 0 4px 18px #6366f13a;
-            transform: scale(1.05);
+          .shop-now-btn:hover {
+            background: var(--brand-light);
           }
-          .hero-section {
+          
+          /* Deals Section */
+          .section-title {
+            font-size: 26px;
+            font-weight: 700;
+            text-align: center;
+            margin: 40px 0 30px;
+            position: relative;
+            text-transform: uppercase;
+            color: var(--text-primary);
+          }
+          .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--brand-color);
+            margin: 8px auto 0;
+          }
+          .deals-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+          }
+          .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+          }
+          @media (min-width: 768px) {
+            .deals-grid {
+              grid-template-columns: repeat(4, 1fr);
+            }
+          }
+          .deal-card {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid var(--border-color);
+          }
+          .deal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            border-color: var(--brand-color);
+          }
+          .deal-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            filter: brightness(0.9);
+          }
+          .deal-text {
+            padding: 16px;
+            text-align: center;
+          }
+          .deal-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+          }
+          .deal-desc {
+            font-size: 14px;
+            color: var(--brand-light);
+          }
+          .discount-tag {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--brand-color);
+            color: white;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+          }
+          
+          /* Categories Section */
+          .categories-container {
+            max-width: 1300px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+          }
+          .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+          }
+          @media (min-width: 768px) {
+            .categories-grid {
+              grid-template-columns: repeat(6, 1fr);
+            }
+          }
+          .category-card {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+          }
+          .category-card:hover {
+            transform: translateY(-5px);
+          }
+          .category-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            border: 2px solid var(--border-color);
+          }
+          .category-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+          }
+          
+          /* Trending Section */
+          .trending-container {
+            max-width: 1300px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+          }
+          .trending-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+          }
+          @media (min-width: 768px) {
+            .trending-grid {
+              grid-template-columns: repeat(4, 1fr);
+            }
+          }
+          .trending-card {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid var(--border-color);
+          }
+          .trending-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            border-color: var(--brand-color);
+          }
+          .trending-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            filter: brightness(0.9);
+          }
+          .trending-info {
+            padding: 12px;
+          }
+          .trending-brand {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+          }
+          .trending-name {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+          }
+          .trending-price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
+          .trending-current {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+          }
+          .trending-original {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+          }
+          .trending-discount {
+            font-size: 12px;
+            color: var(--warning-color);
+            font-weight: 700;
+          }
+          .rating-tag {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-primary);
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            border: 1px solid var(--border-color);
+          }
+          .rating-tag svg {
+            color: var(--success-color);
+            margin-right: 4px;
+          }
+          
+          /* Offers Strip */
+          .offers-strip {
+            background: #2a2a2a;
+            padding: 16px 0;
+            margin: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+          }
+          .offers-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+          }
+          .offer-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 20px;
+          }
+          .offer-icon {
+            margin-right: 12px;
+            color: var(--brand-color);
+            font-size: 24px;
+          }
+          .offer-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+          }
+          
+          /* Newsletter */
+          .newsletter {
+            background: #1f1f1f;
+            padding: 60px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+          }
+          .newsletter-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+          }
+          .newsletter h2 {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+          }
+          .newsletter p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-size: 16px;
+          }
+          .newsletter-form {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 110px 20px 90px 20px;
-            background: linear-gradient(120deg, #23272f 60%, #18181b 100%);
-            border-radius: 0 0 40px 40px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-            position: relative;
-            overflow: hidden;
-            animation: fadeInDown 1.2s cubic-bezier(.39,.575,.56,1) both;
-          }
-          @keyframes fadeInDown {
-            0% { opacity: 0; transform: translateY(-40px);}
-            100% { opacity: 1; transform: translateY(0);}
-          }
-          .hero-section::before {
-            content: "";
-            position: absolute;
-            left: -80px;
-            top: -80px;
-            width: 220px;
-            height: 220px;
-            background: radial-gradient(circle, #818cf8 0%, #23272f 80%);
-            opacity: 0.18;
-            border-radius: 50%;
-            z-index: 0;
-          }
-          .hero-section h1 {
-            font-size: 3.3rem;
-            font-weight: bold;
-            margin-bottom: 1.1rem;
-            letter-spacing: -1px;
-            color: #f3f4f6;
-            text-shadow: 0 2px 16px #18181b;
-            z-index: 1;
-            animation: fadeIn 1.2s 0.2s both;
-          }
-          .hero-section h1 span {
-            color: #818cf8;
-            text-shadow: 0 2px 12px #6366f1;
-          }
-          .hero-section p {
-            font-size: 1.3rem;
-            max-width: 650px;
-            margin-bottom: 2.2rem;
-            color: #cbd5e1;
-            line-height: 1.6;
-            z-index: 1;
-            animation: fadeIn 1.2s 0.4s both;
-          }
-          .hero-section a {
-            background: linear-gradient(90deg, #6366f1 60%, #818cf8 100%);
-            color: white;
-            padding: 16px 40px;
-            border-radius: 9999px;
-            font-size: 1.15rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
-            box-shadow: 0 2px 12px #6366f13a;
-            letter-spacing: 0.5px;
-            z-index: 1;
-            animation: fadeIn 1.2s 0.6s both;
-          }
-          .hero-section a:hover {
-            background: linear-gradient(90deg, #818cf8 60%, #6366f1 100%);
-            box-shadow: 0 4px 18px #6366f13a;
-            transform: scale(1.06);
-          }
-          @keyframes fadeIn {
-            0% { opacity: 0;}
-            100% { opacity: 1;}
-          }
-          .features-section {
-            padding: 80px 20px 70px 20px;
-            text-align: center;
-            background: transparent;
-            animation: fadeIn 1.2s 0.8s both;
-          }
-          .features-section h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 2.5rem;
-            color: #e0e7ef;
-            letter-spacing: 0.5px;
-          }
-          .features-section .features-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-            max-width: 950px;
+            max-width: 500px;
             margin: 0 auto;
           }
           @media (min-width: 768px) {
-            .features-section .features-grid {
-              grid-template-columns: repeat(3, 1fr);
+            .newsletter-form {
+              flex-direction: row;
             }
           }
-          .feature-card {
-            background: linear-gradient(135deg, #23272f 60%, #18181b 100%);
-            border-radius: 22px;
-            box-shadow: 0 4px 18px rgba(0,0,0,0.13);
-            padding: 44px 26px 36px 26px;
-            color: #f3f4f6;
-            border: 1.5px solid #30343c; /* dark border */
-            transition: transform 0.18s, box-shadow 0.18s;
-            position: relative;
-            overflow: hidden;
+          .newsletter-input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            margin-bottom: 12px;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
           }
-          .feature-card:hover {
-            transform: translateY(-8px) scale(1.04);
-            box-shadow: 0 10px 36px #6366f13a;
-            border-color: #6366f1;
+          @media (min-width: 768px) {
+            .newsletter-input {
+              margin-bottom: 0;
+              border-radius: 4px 0 0 4px;
+            }
           }
-          .feature-card::before {
-            content: "";
-            position: absolute;
-            right: -40px;
-            top: -40px;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, #6366f1 0%, #23272f 80%);
-            opacity: 0.13;
-            border-radius: 50%;
-            z-index: 0;
-          }
-          .features-section h3 {
-            font-size: 1.28rem;
+          .newsletter-btn {
+            background: var(--brand-color);
+            color: white;
+            border: none;
+            padding: 14px 24px;
             font-weight: 600;
-            margin-bottom: 0.7rem;
-            color: #a5b4fc;
-            letter-spacing: 0.3px;
-            z-index: 1;
-            position: relative;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
           }
-          .features-section p {
-            color: #cbd5e1;
-            font-size: 1.08rem;
-            line-height: 1.6;
-            z-index: 1;
-            position: relative;
+          @media (min-width: 768px) {
+            .newsletter-btn {
+              border-radius: 0 4px 4px 0;
+            }
           }
+          
+          /* Footer */
           .footer {
-            background: #18181b;
-            color: #a5b4fc;
-            padding: 44px 0 22px 0;
-            margin-top: 0;
-            border-top: 1.5px solid #23272f; /* dark border */
-            box-shadow: 0 -2px 18px #23272f44;
-            animation: fadeIn 1.2s 1.2s both;
+            background: #1a1a1a;
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--border-color);
           }
-          .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-            max-width: 900px;
+          .footer-container {
+            max-width: 1300px;
             margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
           }
-          .footer-brand {
+          @media (min-width: 768px) {
+            .footer-container {
+              grid-template-columns: repeat(4, 1fr);
+            }
+          }
+          .footer-section h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+          }
+          .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+          .footer-links li {
+            margin-bottom: 12px;
+          }
+          .footer-links a {
+            color: var(--text-secondary);
+            font-size: 14px;
+            text-decoration: none;
+            transition: color 0.2s;
+          }
+          .footer-links a:hover {
+            color: var(--brand-color);
+          }
+          .download-section {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 4px;
+            gap: 12px;
           }
-          .footer-logo {
-            font-size: 2.1rem;
-            font-weight: 700;
-            color: #818cf8;
-            letter-spacing: 1px;
+          .download-badge {
+            display: block;
+            max-width: 140px;
+            height: auto;
           }
-          .footer-tagline {
-            font-size: 1.09rem;
-            color: #cbd5e1;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-          }
-          .footer-socials {
+          .social-links {
             display: flex;
-            gap: 22px;
-            margin-top: 8px;
+            gap: 16px;
+            margin-top: 20px;
           }
-          .footer-socials a {
+          .social-links a {
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #23272f;
             border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            transition: background 0.18s, transform 0.18s;
+            background: var(--bg-element);
+            transition: background 0.2s;
           }
-          .footer-socials a:hover {
-            background: #6366f1;
-            transform: scale(1.1);
+          .social-links a:hover {
+            background: var(--brand-color);
           }
-          .footer-bottom {
+          .social-links svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--text-secondary);
+          }
+          .social-links a:hover svg {
+            fill: white;
+          }
+          .copyright {
+            max-width: 1300px;
+            margin: 40px auto 0;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
             text-align: center;
-            margin-top: 18px;
-            font-size: 1.04rem;
-            color: #cbd5e1;
-            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            font-size: 14px;
           }
         `}
       </style>
 
-      <button
-        className="cart-top-btn"
-        onClick={() => navigate("/cart")}
-      >
-        View Cart
-      </button>
+      {/* Hero Banner */}
+      <div className="hero-banner">
+        <img src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/7/28/84b6a214-9eb3-49eb-9f9d-72cec56ec5d71659019908592-Indian-Wear_DK--1-.jpg" alt="Summer Collection" />
+        <div className="overlay">
+          <h1>Biggest Deals on Top Brands</h1>
+          <p>Find your style among thousands of products</p>
+          <Link to="/shopnow" className="shop-now-btn">Shop Now</Link>
+        </div>
+      </div>
 
-      <section className="hero-section">
-        <h1>
-          Welcome to <span>Tint</span>
-        </h1>
-        <p>
-          Discover bold, comfortable, and sustainable fashion made for every shade of you.
-        </p>
-        <Link to="/shopnow">
-          Shop Now
-        </Link>
-      </section>
-
-      <section className="features-section">
-        <h2>Why Choose Tint?</h2>
-        <div className="features-grid">
-          <div className="feature-card">
-            <h3>Eco-Friendly</h3>
-            <p>Clothes made with love and sustainable materials. Reduce your footprint, look great doing it.</p>
+      {/* Deals Section */}
+      <h2 className="section-title">Deals of the Day</h2>
+      <div className="deals-container">
+        <div className="deals-grid">
+          <div className="deal-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2022/8/17/49939a83-5bf1-4c78-b55d-40d7545f843e1660744474034-Kurtas--4-.jpg" alt="Summer Deal" />
+            <div className="deal-text">
+              <h3 className="deal-title">Summer Fashion</h3>
+              <p className="deal-desc">Min 50% Off</p>
+            </div>
+            <div className="discount-tag">TRENDING</div>
           </div>
-          <div className="feature-card">
-            <h3>Bold Designs</h3>
-            <p>Trendy and timeless collections with unique style. Stand out and express yourself every day.</p>
+          
+          <div className="deal-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2022/8/17/d5f885c5-4a54-4634-81da-6333aa51c1a11660744537981-Dresses--13-.jpg" alt="Women's Deal" />
+            <div className="deal-text">
+              <h3 className="deal-title">Women's Dresses</h3>
+              <p className="deal-desc">30-70% Off</p>
+            </div>
+            <div className="discount-tag">HOT</div>
           </div>
-          <div className="feature-card">
-            <h3>Comfort Fit</h3>
-            <p>All-day comfort without compromising on looks. Designed for every body, every occasion.</p>
+          
+          <div className="deal-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2022/8/17/9e19d40a-6720-4d62-92e0-32cd1ee6bee91660744511339-Flats---Heels--8-.jpg" alt="Shoes Deal" />
+            <div className="deal-text">
+              <h3 className="deal-title">Footwear Collection</h3>
+              <p className="deal-desc">Up to 60% Off</p>
+            </div>
+            <div className="discount-tag">LIMITED</div>
+          </div>
+          
+          <div className="deal-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2022/8/17/948bd0a5-5b50-4b1e-93cc-234a9be8cfe11660744474026-Jeans--4-.jpg" alt="Men's Deal" />
+            <div className="deal-text">
+              <h3 className="deal-title">Men's Collection</h3>
+              <p className="deal-desc">40-80% Off</p>
+            </div>
+            <div className="discount-tag">NEW</div>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Categories Section */}
+      <h2 className="section-title">Shop By Category</h2>
+      <div className="categories-container">
+        <div className="categories-grid">
+          <div className="category-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,w_163,c_limit,fl_progressive,dpr_2.0/assets/images/2023/1/12/a187855e-8ee6-4e6f-b1b4-012ac9ce42cd1673517216829-ImagePDP_11.jpg" alt="Men's Fashion" />
+            <div className="category-name">Men</div>
+          </div>
+          
+          <div className="category-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,w_163,c_limit,fl_progressive,dpr_2.0/assets/images/2023/1/12/bc8894fb-c7ee-4df2-b7e5-bae4d0a8a2661673517216841-ImagePDP_2.jpg" alt="Women's Fashion" />
+            <div className="category-name">Women</div>
+          </div>
+          
+          <div className="category-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,w_163,c_limit,fl_progressive,dpr_2.0/assets/images/2023/1/12/f39c8fa7-a156-4ede-a0f6-a3f2d786c4991673517216835-ImagePDP_5.jpg" alt="Kids Fashion" />
+            <div className="category-name">Kids</div>
+          </div>
+          
+          <div className="category-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,w_163,c_limit,fl_progressive,dpr_2.0/assets/images/2023/1/12/40e95088-11a3-478e-a8d7-21a0397aaa841673517216823-ImagePDP_8.jpg" alt="Accessories" />
+            <div className="category-name">Accessories</div>
+          </div>
+          
+          <div className="category-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,w_163,c_limit,fl_progressive,dpr_2.0/assets/images/2023/1/12/c61ccb73-a636-4a78-b0ed-dd9ab145093e1673517216815-ImagePDP_3.jpg" alt="Footwear" />
+            <div className="category-name">Footwear</div>
+          </div>
+          
+          <div className="category-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,w_163,c_limit,fl_progressive,dpr_2.0/assets/images/2023/1/12/be62307f-4fa7-45cc-b0ae-27874f1fcd1a1673517216847-ImagePDP_15.jpg" alt="Beauty" />
+            <div className="category-name">Beauty</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Offers Strip */}
+      <div className="offers-strip">
+        <div className="offers-container">
+          <div className="offer-item">
+            <div className="offer-icon">⚡</div>
+            <div className="offer-text">FREE SHIPPING ON FIRST ORDER</div>
+          </div>
+          <div className="offer-item">
+            <div className="offer-icon">🎁</div>
+            <div className="offer-text">EASY 30 DAYS RETURNS</div>
+          </div>
+          <div className="offer-item">
+            <div className="offer-icon">💰</div>
+            <div className="offer-text">COD AVAILABLE</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Trending Products */}
+      <h2 className="section-title">Trending Now</h2>
+      <div className="trending-container">
+        <div className="trending-grid">
+          <div className="trending-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/19818628/2022/9/6/ec27eee6-d613-4423-8e0f-007aea77f2531662468109188Shirts1.jpg" alt="Trending Product" />
+            <div className="rating-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#14958f">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              4.5
+            </div>
+            <div className="trending-info">
+              <div className="trending-brand">Roadster</div>
+              <div className="trending-name">Men Regular Fit Casual Shirt</div>
+              <div className="trending-price">
+                <span className="trending-current">₹649</span>
+                <span className="trending-original">₹1299</span>
+                <span className="trending-discount">(50% OFF)</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="trending-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/17048614/2022/2/4/11d058f2-d509-4aed-8daa-2c039c1e13931643978217282MastHarbourMenBlueStripedPoloCollarPocketsT-shirt1.jpg" alt="Trending Product" />
+            <div className="rating-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#14958f">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              4.2
+            </div>
+            <div className="trending-info">
+              <div className="trending-brand">Mast & Harbour</div>
+              <div className="trending-name">Men Striped Polo T-shirt</div>
+              <div className="trending-price">
+                <span className="trending-current">₹519</span>
+                <span className="trending-original">₹1299</span>
+                <span className="trending-discount">(60% OFF)</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="trending-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/16590968/2021/12/23/ef2521a7-c238-4cda-9d34-6ca857b034281640243292719Kurtas1.jpg" alt="Trending Product" />
+            <div className="rating-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#14958f">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              4.7
+            </div>
+            <div className="trending-info">
+              <div className="trending-brand">Libas</div>
+              <div className="trending-name">Women Printed Kurta with Trousers</div>
+              <div className="trending-price">
+                <span className="trending-current">₹1299</span>
+                <span className="trending-original">₹2599</span>
+                <span className="trending-discount">(50% OFF)</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="trending-card" onClick={() => navigate("/shopnow")}>
+            <img src="https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/19249992/2022/8/8/55884c5e-3946-4030-8c12-d9737ae69dff1659942275070-Indo-Era-Beige-Embroidered-Straight-Kurta-Trouser-With-Dupat-1.jpg" alt="Trending Product" />
+            <div className="rating-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#14958f">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              4.3
+            </div>
+            <div className="trending-info">
+              <div className="trending-brand">Indo Era</div>
+              <div className="trending-name">Women Embroidered Kurta Set</div>
+              <div className="trending-price">
+                <span className="trending-current">₹1559</span>
+                <span className="trending-original">₹3999</span>
+                <span className="trending-discount">(61% OFF)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Newsletter */}
+      <div className="newsletter">
+        <div className="newsletter-container">
+          <h2>Subscribe to our Newsletter</h2>
+          <p>Get updates on sales, new arrivals and more!</p>
+          <form className="newsletter-form">
+            <input 
+              type="email" 
+              className="newsletter-input" 
+              placeholder="Enter your email address" 
+              required 
+            />
+            <button type="submit" className="newsletter-btn">SUBSCRIBE</button>
+          </form>
+        </div>
+      </div>
+
+      {/* Footer */}
       <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-brand">
-            <span className="footer-logo">Tint</span>
-            <span className="footer-tagline">Wear Your Shade</span>
+        <div className="footer-container">
+          <div className="footer-section">
+            <h3>Online Shopping</h3>
+            <ul className="footer-links">
+              <li><a href="#men">Men</a></li>
+              <li><a href="#women">Women</a></li>
+              <li><a href="#kids">Kids</a></li>
+              <li><a href="#home">Home & Living</a></li>
+              <li><a href="#beauty">Beauty</a></li>
+              <li><a href="#gift">Gift Cards</a></li>
+            </ul>
           </div>
-          <div className="footer-socials">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg width="24" height="24" fill="#a5b4fc" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.584.012 4.85.07 1.17.056 1.97.24 2.43.41a4.92 4.92 0 0 1 1.77 1.03c.48.48.85 1.07 1.03 1.77.17.46.354 1.26.41 2.43.058 1.266.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.24 1.97-.41 2.43a4.92 4.92 0 0 1-1.03 1.77c-.48.48-1.07.85-1.77 1.03-.46.17-1.26.354-2.43.41-1.266.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.97-.24-2.43-.41a4.92 4.92 0 0 1-1.77-1.03c-.48-.48-.85-1.07-1.03-1.77-.17-.46-.354-1.26-.41-2.43C2.212 15.784 2.2 15.4 2.2 12.2s.012-3.584.07-4.85c.056-1.17.24-1.97.41-2.43a4.92 4.92 0 0 1 1.03-1.77c.48-.48 1.07-.85 1.77-1.03.46-.17 1.26-.354 2.43-.41C8.416 2.212 8.8 2.2 12 2.2zm0-2.2C8.736 0 8.332.013 7.052.072 5.77.13 4.74.32 3.89.6a7.07 7.07 0 0 0-2.56 1.64A7.07 7.07 0 0 0 .6 3.89c-.28.85-.47 1.88-.53 3.16C.013 8.332 0 8.736 0 12c0 3.264.013 3.668.072 4.948.058 1.282.25 2.312.53 3.162a7.07 7.07 0 0 0 1.64 2.56 7.07 7.07 0 0 0 2.56 1.64c.85.28 1.88.47 3.16.53C8.332 23.987 8.736 24 12 24s3.668-.013 4.948-.072c1.282-.058 2.312-.25 3.162-.53a7.07 7.07 0 0 0 2.56-1.64 7.07 7.07 0 0 0 1.64-2.56c.28-.85.47-1.88.53-3.16.059-1.28.072-1.684.072-4.948 0-3.264-.013-3.668-.072-4.948-.058-1.282-.25-2.312-.53-3.162a7.07 7.07 0 0 0-1.64-2.56A7.07 7.07 0 0 0 20.11.6c-.85-.28-1.88-.47-3.16-.53C15.668.013 15.264 0 12 0z"/><path d="M12 5.838A6.162 6.162 0 1 0 12 18.162 6.162 6.162 0 1 0 12 5.838zm0 10.162A4 4 0 1 1 12 8a4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-              <svg width="24" height="24" fill="#a5b4fc" viewBox="0 0 24 24"><path d="M24 4.557a9.83 9.83 0 0 1-2.828.775 4.932 4.932 0 0 0 2.165-2.724c-.951.564-2.005.974-3.127 1.195a4.916 4.916 0 0 0-8.38 4.482C7.691 8.095 4.066 6.13 1.64 3.161c-.542.929-.856 2.01-.857 3.17 0 2.188 1.115 4.117 2.823 5.254a4.904 4.904 0 0 1-2.229-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.936 4.936 0 0 1-2.224.084c.627 1.956 2.444 3.377 4.6 3.417A9.867 9.867 0 0 1 0 21.543a13.94 13.94 0 0 0 7.548 2.209c9.058 0 14.009-7.513 14.009-14.009 0-.213-.005-.425-.014-.636A10.012 10.012 0 0 0 24 4.557z"/></svg>
-            </a>
-            <a href="mailto:support@tint.com" aria-label="Email">
-              <svg width="24" height="24" fill="#a5b4fc" viewBox="0 0 24 24"><path d="M12 13.065L.8 6.2V18a2 2 0 0 0 2 2h18.4a2 2 0 0 0 2-2V6.2l-11.2 6.865zm10.4-9.065H1.6a2 2 0 0 0-1.6 2l11.2 6.865L22.4 6a2 2 0 0 0-1.6-2z"/></svg>
-            </a>
+          
+          <div className="footer-section">
+            <h3>Customer Policies</h3>
+            <ul className="footer-links">
+              <li><a href="#contact">Contact Us</a></li>
+              <li><a href="#faq">FAQ</a></li>
+              <li><a href="#terms">Terms Of Use</a></li>
+              <li><a href="#track">Track Orders</a></li>
+              <li><a href="#shipping">Shipping</a></li>
+              <li><a href="#returns">Returns</a></li>
+            </ul>
+          </div>
+          
+          <div className="footer-section">
+            <h3>Experience Tint App</h3>
+            <div className="download-section">
+              <img src="https://constant.myntassets.com/web/assets/img/80cc455a-92d2-4b5c-a038-7da0d92af33f1539674178924-google_play.png" alt="Google Play" className="download-badge" />
+              <img src="https://constant.myntassets.com/web/assets/img/bc5e11ad-0250-420a-ac71-115a57ca35d51539674178941-apple_store.png" alt="App Store" className="download-badge" />
+            </div>
+          </div>
+          
+          <div className="footer-section">
+            <h3>Keep in Touch</h3>
+            <div className="social-links">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                <svg viewBox="0 0 24 24"><path d="M23.64 4.74c-.86.38-1.8.64-2.78.76 1-.6 1.76-1.54 2.12-2.67-.94.55-1.97.95-3.07 1.17a4.85 4.85 0 0 0-8.26 4.42 13.74 13.74 0 0 1-9.97-5.06 4.85 4.85 0 0 0 1.5 6.47 4.84 4.84 0 0 1-2.2-.61v.06a4.85 4.85 0 0 0 3.89 4.75 4.86 4.86 0 0 1-2.19.08 4.85 4.85 0 0 0 4.53 3.37 9.72 9.72 0 0 1-6.01 2.07c-.39 0-.78-.02-1.16-.07a13.7 13.7 0 0 0 7.41 2.17c8.9 0 13.76-7.37 13.76-13.76 0-.213-.005-.425-.014-.636A10.012 10.012 0 0 0 24 4.557z"/></svg>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07-3.2 0-3.58-.01-4.85-.07-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85 0-3.2.01-3.58.07-4.85.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.15.63c-.78.3-1.44.71-2.1 1.37-.66.66-1.07 1.32-1.37 2.1-.3.75-.5 1.63-.56 2.9C.01 8.33 0 8.74 0 12c0 3.26.01 3.67.07 4.95.06 1.27.26 2.15.56 2.9.3.78.71 1.44 1.37 2.1.66.66 1.32 1.07 2.1 1.37.75.3 1.63.5 2.9.56 1.28.06 1.69.07 4.95.07 3.26 0 3.67-.01 4.95-.07 1.27-.06 2.15-.26 2.9-.56.78-.3 1.44-.71 2.1-1.37.66-.66 1.07-1.32 1.37-2.1.3-.75.5-1.63.56-2.9.06-1.28.07-1.69.07-4.95 0-3.26-.01-3.67-.07-4.95-.06-1.27-.26-2.15-.56-2.9-.3-.78-.71-1.44-1.37-2.1-.66-.66-1.32-1.07-2.1-1.37-.75-.3-1.63-.5-2.9-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.84-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/></svg>
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <svg viewBox="0 0 24 24"><path d="M23.5 6.2c-.14-.55-.55-1-1.07-1.15C20.8 4.8 12 4.8 12 4.8s-8.8 0-10.43.25c-.52.15-.93.6-1.07 1.15C.2 7.85.2 12 .2 12s0 4.15.3 5.8c.14.55.55 1 1.07 1.15 1.63.25 10.43.25 10.43.25s8.8 0 10.43-.25c.52-.15.93-.6 1.07-1.15.3-1.65.3-5.8.3-5.8s0-4.15-.3-5.8zM9.6 15.6V8.4l7.2 3.6-7.2 3.6z"/></svg>
+              </a>
+            </div>
           </div>
         </div>
-        <div className="footer-bottom">
+        
+        <div className="copyright">
           © {new Date().getFullYear()} Tint. All rights reserved.
         </div>
       </footer>
