@@ -243,32 +243,32 @@ const Navbar = () => {
         {/* Main Navigation */}
         <div className="navbar-menu">
           <Link
-            to="/shopnow"
-            className={`navbar-menu-item${location.pathname === "/shopnow" ? " active" : ""}`}
+            to="/shopnow?category=men"
+            className={`navbar-menu-item${location.pathname === "/shopnow" && location.search.includes('category=men') ? " active" : ""}`}
           >
             Men
           </Link>
           <Link
-            to="/shopnow"
-            className="navbar-menu-item"
+            to="/shopnow?category=women"
+            className={`navbar-menu-item${location.pathname === "/shopnow" && location.search.includes('category=women') ? " active" : ""}`}
           >
             Women
           </Link>
           <Link
-            to="/shopnow"
-            className="navbar-menu-item"
+            to="/shopnow?category=kids"
+            className={`navbar-menu-item${location.pathname === "/shopnow" && location.search.includes('category=kids') ? " active" : ""}`}
           >
             Kids
           </Link>
           <Link
-            to="/shopnow"
-            className="navbar-menu-item"
+            to="/shopnow?category=home"
+            className={`navbar-menu-item${location.pathname === "/shopnow" && location.search.includes('category=home') ? " active" : ""}`}
           >
             Home & Living
           </Link>
           <Link
-            to="/shopnow"
-            className="navbar-menu-item"
+            to="/shopnow?category=beauty"
+            className={`navbar-menu-item${location.pathname === "/shopnow" && location.search.includes('category=beauty') ? " active" : ""}`}
           >
             Beauty
           </Link>
@@ -332,35 +332,35 @@ const Navbar = () => {
       {showMobileMenu && (
         <div className="mobile-menu">
           <Link
-            to="/shopnow"
+            to="/shopnow?category=men"
             className="navbar-menu-item"
             onClick={() => setShowMobileMenu(false)}
           >
             Men
           </Link>
           <Link
-            to="/shopnow"
+            to="/shopnow?category=women"
             className="navbar-menu-item"
             onClick={() => setShowMobileMenu(false)}
           >
             Women
           </Link>
           <Link
-            to="/shopnow"
+            to="/shopnow?category=kids"
             className="navbar-menu-item"
             onClick={() => setShowMobileMenu(false)}
           >
             Kids
           </Link>
           <Link
-            to="/shopnow"
+            to="/shopnow?category=home"
             className="navbar-menu-item"
             onClick={() => setShowMobileMenu(false)}
           >
             Home & Living
           </Link>
           <Link
-            to="/shopnow"
+            to="/shopnow?category=beauty"
             className="navbar-menu-item"
             onClick={() => setShowMobileMenu(false)}
           >

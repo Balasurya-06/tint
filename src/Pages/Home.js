@@ -164,6 +164,97 @@ const Home = () => {
             font-weight: 600;
           }
           
+          /* Collections Banner Section */
+          .collections-section {
+            margin: 60px 0;
+          }
+          
+          .collection-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+          }
+          
+          .collection-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+          }
+          
+          @media (min-width: 768px) {
+            .collection-row {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+          
+          .collection-banner {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+          }
+          
+          .collection-banner:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+          }
+          
+          .collection-banner img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            filter: brightness(0.7);
+            transition: filter 0.3s, transform 0.5s;
+          }
+          
+          .collection-banner:hover img {
+            filter: brightness(0.6);
+            transform: scale(1.03);
+          }
+          
+          .collection-content {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            max-width: 70%;
+          }
+          
+          .collection-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+          }
+          
+          .collection-desc {
+            font-size: 16px;
+            color: white;
+            margin-bottom: 16px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+          }
+          
+          .collection-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--brand-color);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 4px;
+            text-transform: uppercase;
+            transition: background 0.2s;
+            text-decoration: none;
+          }
+          
+          .collection-btn:hover {
+            background: var(--brand-light);
+          }
+          
           /* Categories Section */
           .categories-container {
             max-width: 1300px;
@@ -530,6 +621,33 @@ const Home = () => {
               <p className="deal-desc">40-80% Off</p>
             </div>
             <div className="discount-tag">NEW</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Collections Banner Section */}
+      <div className="collections-section">
+        <div className="collection-container">
+          <h2 className="section-title">Featured Collections</h2>
+          
+          <div className="collection-row">
+            <div className="collection-banner" onClick={() => navigate("/shopnow?category=men")}>
+              <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Men's Collection" />
+              <div className="collection-content">
+                <h3 className="collection-title">Men's Collection 2023</h3>
+                <p className="collection-desc">Premium clothing for the modern gentleman</p>
+                <Link to="/shopnow?category=men" className="collection-btn">Explore Now</Link>
+              </div>
+            </div>
+            
+            <div className="collection-banner" onClick={() => navigate("/shopnow?category=footwear")}>
+              <img src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Footwear Collection" />
+              <div className="collection-content">
+                <h3 className="collection-title">Footwear Collection</h3>
+                <p className="collection-desc">Step out in style with our premium footwear</p>
+                <Link to="/shopnow?category=footwear" className="collection-btn">Shop Now</Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ShopNow = () => {
+  const location = useLocation();
+  // Parse query parameters to get category from URL
+  const queryParams = new URLSearchParams(location.search);
+  const categoryFromUrl = queryParams.get('category');
+  
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [minPrice, setMinPrice] = useState("");
@@ -12,10 +18,9 @@ const ShopNow = () => {
   const [minDiscount, setMinDiscount] = useState(""); 
   const [sortBy, setSortBy] = useState("recommended");
   const [categoryFilters, setCategoryFilters] = useState({
-    men: false,
-    women: false,
-    boys: false,
-    girls: false
+    men: categoryFromUrl === 'men',
+    women: categoryFromUrl === 'women',
+    kids: categoryFromUrl === 'kids'
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
@@ -69,6 +74,14 @@ const ShopNow = () => {
         setProducts(productsWithDiscount);
         setFilteredProducts(productsWithDiscount);
         setLoading(false);
+        
+        // If we have a category from URL, set the appropriate gender filter
+        if (categoryFromUrl) {
+          if (categoryFromUrl === 'men') setGender('male');
+          else if (categoryFromUrl === 'women') setGender('female');
+          else if (categoryFromUrl === 'boys' || categoryFromUrl === 'kids') setGender('boys');
+          else if (categoryFromUrl === 'girls') setGender('girls');
+        }
       })
       .catch((err) => {
         console.error("Error fetching products:", err);
@@ -76,26 +89,46 @@ const ShopNow = () => {
         setLoading(false);
       });
   }, []);
+  
+  // Handle URL parameter changes for category
+  useEffect(() => {
+    // Update category filters when URL changes
+    if (categoryFromUrl) {
+      const newFilters = {
+        men: categoryFromUrl === 'men',
+        women: categoryFromUrl === 'women',
+        kids: categoryFromUrl === 'kids'
+      };
+      
+      setCategoryFilters(newFilters);
+      
+      // Also set the gender filter to match selected category
+      if (categoryFromUrl === 'men') setGender('male');
+      else if (categoryFromUrl === 'women') setGender('female');
+      else if (categoryFromUrl === 'kids') setGender('kids');
+    }
+  }, [location.search, categoryFromUrl]);
 
   // Handle category filter changes
   const handleCategoryChange = (category) => {
-    setCategoryFilters({
+    // Create new filter state
+    const newFilters = {
       ...categoryFilters,
       [category]: !categoryFilters[category]
-    });
+    };
+    
+    setCategoryFilters(newFilters);
+    
+    // Update gender filter when category is changed
+    if (category === 'men' && newFilters.men) setGender('male');
+    else if (category === 'women' && newFilters.women) setGender('female');
+    else if (category === 'kids' && newFilters.kids) setGender('kids');
+    else if (!newFilters.men && !newFilters.women && !newFilters.kids) {
+      // If no categories are selected, reset gender filter
+      setGender('');
+    }
   };
-
-  // Handle product category selection
-  const handleProductCategoryChange = (category) => {
-    setSelectedCategories(prev => {
-      if (prev.includes(category)) {
-        return prev.filter(c => c !== category);
-      } else {
-        return [...prev, category];
-      }
-    });
-  };
-
+  
   // Reset all filters
   const resetFilters = () => {
     setMinPrice("");
@@ -106,8 +139,7 @@ const ShopNow = () => {
     setCategoryFilters({
       men: false,
       women: false,
-      boys: false,
-      girls: false
+      kids: false
     });
     setSelectedCategories([]);
     setSearchQuery("");
@@ -142,8 +174,7 @@ const ShopNow = () => {
         const productGender = p.gender.toLowerCase();
         if (categoryFilters.men && productGender === 'male') return true;
         if (categoryFilters.women && productGender === 'female') return true;
-        if (categoryFilters.boys && productGender === 'boys') return true;
-        if (categoryFilters.girls && productGender === 'girls') return true;
+        if (categoryFilters.kids && (productGender === 'kids' || productGender === 'boys' || productGender === 'girls')) return true;
         return false;
       });
     }
@@ -250,16 +281,14 @@ const ShopNow = () => {
     return wishlistItems.includes(productId);
   };
 
-  // View product details - Updated to handle routes correctly
+  // View product details - Updated to properly navigate to product detail page
   const viewProductDetails = (product) => {
     // Store the product in localStorage for easy access on the details page
     localStorage.setItem("viewedProduct", JSON.stringify(product));
-    // Use quick view instead of navigating to a non-existent route
-    setQuickViewProduct(product);
-    // Alternative: navigate to home page or another existing page
-    // window.location.href = "/";
+    // Navigate to product detail page
+    window.location.href = `/product/${product.product_id}`;
   };
-  
+
   // Handle quick view
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const handleQuickView = (product, e) => {
@@ -269,6 +298,17 @@ const ShopNow = () => {
   
   const closeQuickView = () => {
     setQuickViewProduct(null);
+  };
+
+  // Handle product category selection
+  const handleProductCategoryChange = (category) => {
+    setSelectedCategories(prev => {
+      if (prev.includes(category)) {
+        return prev.filter(c => c !== category);
+      } else {
+        return [...prev, category];
+      }
+    });
   };
 
   // Loading state
@@ -998,18 +1038,10 @@ const ShopNow = () => {
               <label className="filter-checkbox">
                 <input 
                   type="checkbox" 
-                  checked={categoryFilters.boys}
-                  onChange={() => handleCategoryChange('boys')} 
+                  checked={categoryFilters.kids}
+                  onChange={() => handleCategoryChange('kids')} 
                 />
-                Boys
-              </label>
-              <label className="filter-checkbox">
-                <input 
-                  type="checkbox" 
-                  checked={categoryFilters.girls}
-                  onChange={() => handleCategoryChange('girls')} 
-                />
-                Girls
+                Kids
               </label>
             </div>
           </div>
@@ -1078,6 +1110,7 @@ const ShopNow = () => {
                 <option value="">All</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
+                <option value="kids">Kids</option>
                 <option value="unisex">Unisex</option>
               </select>
             </div>
@@ -1087,12 +1120,24 @@ const ShopNow = () => {
         {/* Right Column - Products */}
         <div className="products-column">
           <div className="breadcrumb">
-            <a href="/">Home</a> <span>/</span> <a href="/shop">Clothings & Apparels</a>
+            <a href="/">Home</a> <span>/</span> 
+            {categoryFromUrl ? (
+              <>
+                <span>{categoryFromUrl.charAt(0).toUpperCase() + categoryFromUrl.slice(1)}</span>
+              </>
+            ) : (
+              <span>All Products</span>
+            )}
           </div>
           
           <div className="header-section">
             <h1 className="category-title">
-              Clothings & Apparels <span className="item-count">({filteredProducts.length} items)</span>
+              {categoryFromUrl ? (
+                categoryFromUrl.charAt(0).toUpperCase() + categoryFromUrl.slice(1)
+              ) : (
+                "All Products"
+              )} 
+              <span className="item-count">({filteredProducts.length} items)</span>
             </h1>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div className="view-toggle">
