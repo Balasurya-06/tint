@@ -261,6 +261,12 @@ const Navbar = () => {
             Kids
           </Link>
           <Link
+            to="/reviews"
+            className={`navbar-menu-item${location.pathname === "/reviews" ? " active" : ""}`}
+          >
+            Ratings & Reviews
+          </Link>
+          <Link
             to="/shopnow?category=home"
             className={`navbar-menu-item${location.pathname === "/shopnow" && location.search.includes('category=home') ? " active" : ""}`}
           >
@@ -351,6 +357,13 @@ const Navbar = () => {
             onClick={() => setShowMobileMenu(false)}
           >
             Kids
+          </Link>
+          <Link
+            to="/reviews"
+            className="navbar-menu-item"
+            onClick={() => setShowMobileMenu(false)}
+          >
+            Ratings & Reviews
           </Link>
           <Link
             to="/shopnow?category=home"

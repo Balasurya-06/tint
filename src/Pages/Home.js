@@ -575,7 +575,7 @@ const Home = () => {
 
       {/* Hero Banner */}
       <div className="hero-banner">
-        <img src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/7/28/84b6a214-9eb3-49eb-9f9d-72cec56ec5d71659019908592-Indian-Wear_DK--1-.jpg" alt="Summer Collection" />
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Summer Collection" />
         <div className="overlay">
           <h1>Biggest Deals on Top Brands</h1>
           <p>Find your style among thousands of products</p>
@@ -588,7 +588,7 @@ const Home = () => {
       <div className="deals-container">
         <div className="deals-grid">
           <div className="deal-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2022/8/17/49939a83-5bf1-4c78-b55d-40d7545f843e1660744474034-Kurtas--4-.jpg" alt="Summer Deal" />
+            <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Summer Deal" />
             <div className="deal-text">
               <h3 className="deal-title">Summer Fashion</h3>
               <p className="deal-desc">Min 50% Off</p>
@@ -597,7 +597,7 @@ const Home = () => {
           </div>
           
           <div className="deal-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2022/8/17/d5f885c5-4a54-4634-81da-6333aa51c1a11660744537981-Dresses--13-.jpg" alt="Women's Deal" />
+            <img src="https://images.unsplash.com/photo-1618932260643-eee4a2f652a6?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Women's Deal" />
             <div className="deal-text">
               <h3 className="deal-title">Women's Dresses</h3>
               <p className="deal-desc">30-70% Off</p>
@@ -606,7 +606,7 @@ const Home = () => {
           </div>
           
           <div className="deal-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2022/8/17/9e19d40a-6720-4d62-92e0-32cd1ee6bee91660744511339-Flats---Heels--8-.jpg" alt="Shoes Deal" />
+            <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Shoes Deal" />
             <div className="deal-text">
               <h3 className="deal-title">Footwear Collection</h3>
               <p className="deal-desc">Up to 60% Off</p>
@@ -615,7 +615,7 @@ const Home = () => {
           </div>
           
           <div className="deal-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2022/8/17/948bd0a5-5b50-4b1e-93cc-234a9be8cfe11660744474026-Jeans--4-.jpg" alt="Men's Deal" />
+            <img src="https://images.unsplash.com/photo-1516826957135-700dedea698c?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Men's Deal" />
             <div className="deal-text">
               <h3 className="deal-title">Men's Collection</h3>
               <p className="deal-desc">40-80% Off</p>
@@ -656,33 +656,33 @@ const Home = () => {
       <h2 className="section-title">Shop By Category</h2>
       <div className="categories-container">
         <div className="categories-grid">
-          <div className="category-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,w_163,c_limit,fl_progressive,dpr_2.0/assets/images/2023/1/12/a187855e-8ee6-4e6f-b1b4-012ac9ce42cd1673517216829-ImagePDP_11.jpg" alt="Men's Fashion" />
+          <div className="category-card" onClick={() => navigate("/shopnow?category=men")}>
+            <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Men's Fashion" />
             <div className="category-name">Men</div>
           </div>
           
-          <div className="category-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,w_163,c_limit,fl_progressive,dpr_2.0/assets/images/2023/1/12/bc8894fb-c7ee-4df2-b7e5-bae4d0a8a2661673517216841-ImagePDP_2.jpg" alt="Women's Fashion" />
+          <div className="category-card" onClick={() => navigate("/shopnow?category=women")}>
+            <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?q=80&w=1575&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Women's Fashion" />
             <div className="category-name">Women</div>
           </div>
           
-          <div className="category-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,w_163,c_limit,fl_progressive,dpr_2.0/assets/images/2023/1/12/f39c8fa7-a156-4ede-a0f6-a3f2d786c4991673517216835-ImagePDP_5.jpg" alt="Kids Fashion" />
+          <div className="category-card" onClick={() => navigate("/shopnow?category=kids")}>
+            <img src="https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?q=80&w=1972&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Kids Fashion" />
             <div className="category-name">Kids</div>
           </div>
           
-          <div className="category-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,w_163,c_limit,fl_progressive,dpr_2.0/assets/images/2023/1/12/40e95088-11a3-478e-a8d7-21a0397aaa841673517216823-ImagePDP_8.jpg" alt="Accessories" />
+          <div className="category-card" onClick={() => navigate("/shopnow?category=accessories")}>
+            <img src="https://images.unsplash.com/photo-1589782182703-2aaa69037b5b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Accessories" />
             <div className="category-name">Accessories</div>
           </div>
           
-          <div className="category-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,w_163,c_limit,fl_progressive,dpr_2.0/assets/images/2023/1/12/c61ccb73-a636-4a78-b0ed-dd9ab145093e1673517216815-ImagePDP_3.jpg" alt="Footwear" />
+          <div className="category-card" onClick={() => navigate("/shopnow?category=footwear")}>
+            <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Footwear" />
             <div className="category-name">Footwear</div>
           </div>
           
-          <div className="category-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,w_163,c_limit,fl_progressive,dpr_2.0/assets/images/2023/1/12/be62307f-4fa7-45cc-b0ae-27874f1fcd1a1673517216847-ImagePDP_15.jpg" alt="Beauty" />
+          <div className="category-card" onClick={() => navigate("/shopnow?category=beauty")}>
+            <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Beauty" />
             <div className="category-name">Beauty</div>
           </div>
         </div>
@@ -711,7 +711,7 @@ const Home = () => {
       <div className="trending-container">
         <div className="trending-grid">
           <div className="trending-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/19818628/2022/9/6/ec27eee6-d613-4423-8e0f-007aea77f2531662468109188Shirts1.jpg" alt="Trending Product" />
+            <img src="https://images.unsplash.com/photo-1563630423918-b58f07336ac9?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Trending Product" />
             <div className="rating-tag">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="#14958f">
                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
@@ -730,7 +730,7 @@ const Home = () => {
           </div>
           
           <div className="trending-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/17048614/2022/2/4/11d058f2-d509-4aed-8daa-2c039c1e13931643978217282MastHarbourMenBlueStripedPoloCollarPocketsT-shirt1.jpg" alt="Trending Product" />
+            <img src="https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Trending Product" />
             <div className="rating-tag">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="#14958f">
                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
@@ -749,7 +749,7 @@ const Home = () => {
           </div>
           
           <div className="trending-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/16590968/2021/12/23/ef2521a7-c238-4cda-9d34-6ca857b034281640243292719Kurtas1.jpg" alt="Trending Product" />
+            <img src="https://images.unsplash.com/photo-1520006403909-838185b237e1?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Trending Product" />
             <div className="rating-tag">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="#14958f">
                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
@@ -762,13 +762,13 @@ const Home = () => {
               <div className="trending-price">
                 <span className="trending-current">₹1299</span>
                 <span className="trending-original">₹2599</span>
-                <span className="trending-discount">(50% OFF)</span>
+                <span class="trending-discount">(50% OFF)</span>
               </div>
             </div>
           </div>
           
           <div className="trending-card" onClick={() => navigate("/shopnow")}>
-            <img src="https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/19249992/2022/8/8/55884c5e-3946-4030-8c12-d9737ae69dff1659942275070-Indo-Era-Beige-Embroidered-Straight-Kurta-Trouser-With-Dupat-1.jpg" alt="Trending Product" />
+            <img src="https://images.unsplash.com/photo-1607083681678-52733140f93a?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Trending Product" />
             <div className="rating-tag">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="#14958f">
                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
@@ -835,8 +835,8 @@ const Home = () => {
           <div className="footer-section">
             <h3>Experience Tint App</h3>
             <div className="download-section">
-              <img src="https://constant.myntassets.com/web/assets/img/80cc455a-92d2-4b5c-a038-7da0d92af33f1539674178924-google_play.png" alt="Google Play" className="download-badge" />
-              <img src="https://constant.myntassets.com/web/assets/img/bc5e11ad-0250-420a-ac71-115a57ca35d51539674178941-apple_store.png" alt="App Store" className="download-badge" />
+              <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Google Play" className="download-badge" />
+              <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="App Store" className="download-badge" />
             </div>
           </div>
           
